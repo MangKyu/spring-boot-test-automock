@@ -1,0 +1,5 @@
+org.springframework.test.context.TestExecutionListener=\
+  com.mangkyu.springboot.test.automock.listener.AutoMockTestExecutionListener
+
+org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc=\
+  com.mangkyu.springboot.test.automock.config.AutoMockAutoConfiguration
