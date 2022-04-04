@@ -57,7 +57,7 @@ public class AutoMockTestContext implements TestContext {
 
     @Override
     public Method getTestMethod() {
-        return null;
+        return testClass.getDeclaredMethods()[0];
     }
 
     @Override
