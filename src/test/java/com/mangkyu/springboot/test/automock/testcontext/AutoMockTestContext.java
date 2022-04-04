@@ -1,8 +1,6 @@
 package com.mangkyu.springboot.test.automock.testcontext;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,8 +9,6 @@ import org.springframework.test.context.TestContext;
 
 import java.lang.reflect.Method;
 import java.util.function.Function;
-
-import static org.mockito.Mockito.mock;
 
 @Slf4j
 public class AutoMockTestContext implements TestContext {
