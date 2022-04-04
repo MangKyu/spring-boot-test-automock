@@ -14,6 +14,7 @@ import static org.mockito.Mockito.mock;
 public final class AutoMockBeanUtils {
 
     public static void registerSingletonMock(final ConfigurableListableBeanFactory beanFactory, final Class<?> parameterType, final String beanName) {
+        log.debug("beanName: {} is registered Singleton", beanName);
         beanFactory.registerSingleton(beanName, mock(parameterType));
     }
 
