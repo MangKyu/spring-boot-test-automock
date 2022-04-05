@@ -1,11 +1,17 @@
+buildscript {
+    dependencies {
+        classpath "io.github.gradle-nexus:publish-plugin:1.1.0"
+    }
+}
+
 plugins {
-    id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
+
 group = 'io.github.mangkyu'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -19,20 +25,27 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-parent:2.6.6'
-    implementation 'org.springframework.boot:spring-boot-starter'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-web'
 
-    implementation 'org.springframework:spring-test'
-    implementation 'org.mockito:mockito-core'
-    implementation 'org.mockito:mockito-junit-jupiter'
+    implementation 'org.springframework:spring-context:5.3.17'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.6.6'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.springframework:spring-test:5.3.17'
+    implementation 'org.mockito:mockito-core:4.3.1'
+    implementation 'org.mockito:mockito-junit-jupiter:4.3.1'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.6'
+    testImplementation 'org.springframework.boot:spring-boot-starter-web:2.6.6'
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
+apply from: "${rootDir}/scripts/publish-maven.gradle"
+apply from: 'publish.gradle'
