@@ -1,3 +1,6 @@
+### CUSTOM ###
+local.properties
+
 HELP.md
 .gradle
 build/
