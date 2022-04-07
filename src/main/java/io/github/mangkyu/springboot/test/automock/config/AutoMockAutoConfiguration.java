@@ -12,7 +12,7 @@ import org.springframework.core.Ordered;
 
 @Configuration
 @ConditionalOnMissingBean(name = AutoMockAutoConfiguration.AUTO_MOCK_BEAN_NAME, search = SearchStrategy.CURRENT)
-@ConditionalOnProperty(name = "io.github.mangkyu.springboot.test.automock", havingValue = "true")
+@ConditionalOnProperty(name = "io.github.mangkyu.automock.enable", havingValue = "true")
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
 public class AutoMockAutoConfiguration {
