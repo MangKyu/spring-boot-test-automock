@@ -3,3 +3,6 @@ org.springframework.test.context.TestExecutionListener=\
 
 org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc=\
   io.github.mangkyu.springboot.test.automock.config.AutoMockAutoConfiguration
+
+org.springframework.context.ApplicationListener=\
+  io.github.mangkyu.springboot.test.automock.listener.AutoMockEventListener
