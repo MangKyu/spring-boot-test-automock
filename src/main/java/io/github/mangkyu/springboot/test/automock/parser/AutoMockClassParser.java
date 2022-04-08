@@ -4,6 +4,7 @@ import io.github.mangkyu.springboot.test.automock.listener.AutoMockTestExecution
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.internal.util.MockUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.TestContext;
 
 import java.lang.reflect.Constructor;
@@ -19,10 +20,12 @@ public final class AutoMockClassParser {
     public static Constructor<?> findConstructor(final String beanClassName) {
         try {
             final Class<?> beanClass = AutoMockClassParser.class.getClassLoader().loadClass(beanClassName);
-            return beanClass.getDeclaredConstructors()[0];
+            return BeanUtils.getResolvableConstructor(beanClass);
         } catch (final ClassNotFoundException e) {
             log.debug("cannot find class: {}", beanClassName, e);
         }
+
+        // return constructor that has no parameterTypes
         return AutoMockTestExecutionListener.class.getDeclaredConstructors()[0];
     }
 
