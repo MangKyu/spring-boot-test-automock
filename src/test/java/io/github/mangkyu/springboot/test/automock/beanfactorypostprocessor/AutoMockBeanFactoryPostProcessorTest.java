@@ -1,5 +1,6 @@
 package io.github.mangkyu.springboot.test.automock.beanfactorypostprocessor;
 
+import io.github.mangkyu.springboot.test.automock.properties.AutoMockProperties;
 import io.github.mangkyu.springboot.test.automock.testcontext.AutoMockTestController;
 import io.github.mangkyu.springboot.test.automock.utils.AutoMockBeanUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AutoMockBeanFactoryPostProcessorTest {
 
@@ -36,7 +38,24 @@ class AutoMockBeanFactoryPostProcessorTest {
     }
 
     @Test
+    void postProcessBeanFactoryFail_AutoMockNotExists() {
+        final IllegalStateException result = assertThrows(IllegalStateException.class, () -> beanFactoryPostProcessor.postProcessBeanFactory(beanFactory));
+
+        assertThat(result).isNotNull();
+    }
+
+    @Test
+    void postProcessBeanFactoryFail_AutoMockNotPropertiesNull() {
+        registerAutoMockProperties("");
+
+        final IllegalStateException result = assertThrows(IllegalStateException.class, () -> beanFactoryPostProcessor.postProcessBeanFactory(beanFactory));
+
+        assertThat(result).isNotNull();
+    }
+
+    @Test
     void postProcessBeanFactorySuccess() {
+        registerAutoMockProperties("mypackage");
         beanFactoryPostProcessor.postProcessBeanFactory(beanFactory);
 
         assertThat(beanFactory.getSingletonNames().length).isEqualTo(clazz.getDeclaredConstructors()[0].getParameterTypes().length + 1);
@@ -47,6 +66,11 @@ class AutoMockBeanFactoryPostProcessorTest {
         final List<Constructor<?>> constructorList = beanFactoryPostProcessor.findConstructorsOfScannedBean(beanFactory);
 
         assertThat(constructorList.size()).isOne();
+    }
+
+    private void registerAutoMockProperties(final String value) {
+        final String beanName = AutoMockBeanUtils.generateDefaultBeanName(beanFactory, AutoMockProperties.class);
+        beanFactory.registerSingleton(beanName, new AutoMockProperties(value));
     }
 
 }

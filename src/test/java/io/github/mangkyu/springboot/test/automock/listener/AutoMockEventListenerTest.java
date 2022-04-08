@@ -42,6 +42,7 @@ class AutoMockEventListenerTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getBasePackage()).isEqualTo(myBasePackage);
+        System.clearProperty(AutoMockPropertyUtils.AUTO_MOCK_BASE_PACKAGE);
     }
 
     @Test
