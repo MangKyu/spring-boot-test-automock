@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 @UtilityClass
 public final class AutoMockPropertyUtils {
 
-    private static final String AUTO_MOCK_BASE_PACKAGE = "io.github.mangkyu.automock.target.basepackage";
+    public static final String AUTO_MOCK_BASE_PACKAGE = "io.github.mangkyu.automock.target.basepackage";
 
     public static String findBasePackage(final ApplicationContext applicationContext) {
         return applicationContext.getEnvironment().getProperty(AUTO_MOCK_BASE_PACKAGE);
