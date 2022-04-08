@@ -10,8 +10,12 @@ plugins {
 }
 
 
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
+apply from: "${rootDir}/scripts/publish-maven.gradle"
+apply from: 'publish.gradle'
+
 group = 'io.github.mangkyu'
-version = '0.0.1'
+version = '0.0.4'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -45,7 +49,3 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
-apply from: "${rootDir}/scripts/publish-maven.gradle"
-apply from: 'publish.gradle'
