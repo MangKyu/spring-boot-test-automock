@@ -1,5 +1,6 @@
 package io.github.mangkyu.springboot.test.automock.parser;
 
+import io.github.mangkyu.springboot.test.automock.listener.AutoMockTestExecutionListener;
 import io.github.mangkyu.springboot.test.automock.testcontext.AutoMockTestContext;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,22 @@ class AutoMockClassParserTest {
     void findMockedFieldVariables() {
         final List<Object> fieldList = AutoMockClassParser.findMockedFieldVariables(testContext);
         assertThat(fieldList.size()).isEqualTo(1);
+    }
+
+    @Test
+    void belongsToUserPackage_True() {
+        final String basePackage = "io.github.mangkyu.springboot.test.automock.listener";
+
+        final boolean result = AutoMockClassParser.belongsToUserPackage(AutoMockTestExecutionListener.class, basePackage);
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void belongsToUserPackage_False() {
+        final String basePackage = "io.github.mangkyu.springboot.test.automock.utils";
+
+        final boolean result = AutoMockClassParser.belongsToUserPackage(AutoMockTestExecutionListener.class, basePackage);
+        assertThat(result).isFalse();
     }
 
     @Getter

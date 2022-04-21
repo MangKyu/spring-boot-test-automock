@@ -43,4 +43,8 @@ public final class AutoMockClassParser {
         return testContext.getTestClass().getDeclaredFields();
     }
 
+    public static boolean belongsToUserPackage(final Class<?> parameterClass, final String basePackage) {
+        return parameterClass.getPackage().getName().contains(basePackage);
+    }
+
 }

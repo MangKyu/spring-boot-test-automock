@@ -30,14 +30,22 @@ public class AutoMockBeanFactoryPostProcessor implements BeanFactoryPostProcesso
 
         for (Constructor<?> v : constructorList) {
             for (Class<?> parameterClass : v.getParameterTypes()) {
-                final String beanName = AutoMockBeanUtils.generateDefaultBeanName((BeanDefinitionRegistry) beanFactory, parameterClass);
-                if (!beanFactory.containsBean(beanName) && parameterClass.getPackage().getName().contains(autoMockProperties.getBasePackage())) {
-                    AutoMockBeanUtils.registerSingletonMock(beanFactory, parameterClass, beanName);
-                }
+                addUnregisteredCustomBeans(beanFactory, autoMockProperties, parameterClass);
             }
         }
 
         log.trace("postProcessBeanFactory complete");
+    }
+
+    private void addUnregisteredCustomBeans(final ConfigurableListableBeanFactory beanFactory, final AutoMockProperties autoMockProperties, final Class<?> parameterClass) {
+        final String beanName = AutoMockBeanUtils.generateDefaultBeanName((BeanDefinitionRegistry) beanFactory, parameterClass);
+        if (isUnregisteredCustomBean(beanFactory, autoMockProperties, parameterClass, beanName)) {
+            AutoMockBeanUtils.registerSingletonMock(beanFactory, parameterClass, beanName);
+        }
+    }
+
+    private boolean isUnregisteredCustomBean(final ConfigurableListableBeanFactory beanFactory, final AutoMockProperties autoMockProperties, final Class<?> parameterClass, final String beanName) {
+        return !beanFactory.containsBean(beanName) && AutoMockClassParser.belongsToUserPackage(parameterClass, autoMockProperties.getBasePackage());
     }
 
     public List<Constructor<?>> findConstructorsOfScannedBean(final ConfigurableListableBeanFactory beanFactory) {
