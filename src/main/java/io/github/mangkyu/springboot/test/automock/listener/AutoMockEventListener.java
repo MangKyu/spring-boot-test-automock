@@ -3,15 +3,17 @@ package io.github.mangkyu.springboot.test.automock.listener;
 import io.github.mangkyu.springboot.test.automock.properties.AutoMockProperties;
 import io.github.mangkyu.springboot.test.automock.utils.AutoMockBeanUtils;
 import io.github.mangkyu.springboot.test.automock.utils.AutoMockPropertyUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.util.StringUtils;
 
-@Slf4j
 public class AutoMockEventListener implements ApplicationListener<ApplicationPreparedEvent> {
+
+    private static final Logger log = LoggerFactory.getLogger(AutoMockEventListener.class);
 
     @Override
     public void onApplicationEvent(final ApplicationPreparedEvent event) {

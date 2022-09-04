@@ -2,8 +2,6 @@ package io.github.mangkyu.springboot.test.automock.parser;
 
 import io.github.mangkyu.springboot.test.automock.listener.AutoMockTestExecutionListener;
 import io.github.mangkyu.springboot.test.automock.testcontext.AutoMockTestContext;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.TestContext;
@@ -56,10 +54,16 @@ class AutoMockClassParserTest {
         assertThat(result).isFalse();
     }
 
-    @Getter
-    @RequiredArgsConstructor
     private static class TestConstructorClass {
         private final String name;
+
+        public TestConstructorClass(final String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
 }

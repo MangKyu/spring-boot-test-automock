@@ -1,9 +1,9 @@
 package io.github.mangkyu.springboot.test.automock.parser;
 
 import io.github.mangkyu.springboot.test.automock.listener.AutoMockTestExecutionListener;
-import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
 import org.mockito.internal.util.MockUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -14,11 +14,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
-@UtilityClass
 public final class AutoMockClassParser {
 
+    private static final Logger log = LoggerFactory.getLogger(AutoMockClassParser.class);
     private static final ClassLoader CLASS_LOADER = AutoMockClassParser.class.getClassLoader();
+
+    private AutoMockClassParser() {
+        throw new IllegalStateException();
+    }
 
     public static Constructor<?> findConstructor(final String beanClassName) {
         try {

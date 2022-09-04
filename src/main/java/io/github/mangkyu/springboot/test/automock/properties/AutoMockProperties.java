@@ -1,12 +1,14 @@
 package io.github.mangkyu.springboot.test.automock.properties;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@Getter
-@RequiredArgsConstructor
 public class AutoMockProperties {
 
     private final String basePackage;
 
+    public AutoMockProperties(final String basePackage) {
+        this.basePackage = basePackage;
+    }
+
+    public String getBasePackage() {
+        return basePackage;
+    }
 }
