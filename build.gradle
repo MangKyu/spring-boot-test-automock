@@ -15,7 +15,7 @@ apply from: "${rootDir}/scripts/publish-maven.gradle"
 apply from: 'publish.gradle'
 
 group = 'io.github.mangkyu'
-version = '0.0.4'
+version = '0.0.5'
 sourceCompatibility = '1.8'
 
 configurations {
@@ -30,20 +30,16 @@ repositories {
 
 dependencies {
 
-    implementation 'org.springframework:spring-context:5.3.18'
-    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.6.6'
-    implementation 'org.slf4j:slf4j-api:1.7.36'
-    implementation 'org.springframework:spring-test:5.3.17'
-    implementation 'org.mockito:mockito-core:4.3.1'
-    implementation 'org.mockito:mockito-junit-jupiter:4.3.1'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.springframework:spring-context:5.3.22'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.7.3'
+    implementation 'org.slf4j:slf4j-api:2.0.0'
+    implementation 'org.springframework:spring-test:5.3.22'
+    implementation 'org.mockito:mockito-core:4.7.0'
+    implementation 'org.mockito:mockito-junit-jupiter:4.7.0'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.6'
-    testImplementation 'org.springframework.boot:spring-boot-starter-web:2.6.6'
-
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-web:2.7.3'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.0'
 }
 
 tasks.named('test') {
